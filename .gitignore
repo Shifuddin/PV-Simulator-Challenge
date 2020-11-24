@@ -1,0 +1,19 @@
+# macOS files
+.DS_Store
+
+#meter logs
+meter/log/
+
+#meter cache
+meter/__pycache__/
+
+#pv simulator logs
+pv_simulator/log/
+pv_simulator/__pycache__/
+
+#rabbitmq logs and config
+rabbitmq/data/
+rabbitmq/etc/
+rabbitmq/logs/
+
+
