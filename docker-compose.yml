@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+      dockerfile: DockerFile
+    hostname: tmh
+    volumes:
+      - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@tmh
+      - ./rabbitmq/logs:/var/log/rabbitmq/log
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test:  rabbitmq-diagnostics -q ping
+      interval: 15s
+      timeout: 5s
+      retries: 5
+  meter:
+    build:
+      context: ./meter
+      dockerfile: Dockerfile
+    volumes:
+      - ./meter/log/:/src/log/
+    environment:
+      - broker_address=amqp://guest:guest@rabbitmq
+      - broker_msg_queue=pv
+      - min_pv=0
+      - max_pv=9000
+      - publishing_interval_seconds=10
+      - initial_sleep=10
+    links:
+      - "rabbitmq:rabbitmq"
+    depends_on:
+      - "rabbitmq"
+  pv_simulator:
+    build:
+      context: ./pv_simulator
+      dockerfile: Dockerfile
+    volumes:
+      - ./pv_simulator/log/:/src/log/
+    environment:
+      - broker_address=amqp://guest:guest@rabbitmq
+      - broker_msg_queue=pv
+      - min_pv=0
+      - max_pv=100
+      - initial_sleep=10
+      - logfile=./log/consumer.txt
+      - log_level=INFO
+      - filestore=./log/pv.csv
+    links:
+      - "rabbitmq:rabbitmq"
+    depends_on:
+      - "rabbitmq"
