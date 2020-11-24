@@ -30,7 +30,7 @@ services:
       - min_pv=0
       - max_pv=9000
       - publishing_interval_seconds=10
-      - initial_delay_second_for_broker_startup=15
+      - initial_delay_second_for_broker_startup=20
     links:
       - "rabbitmq:rabbitmq"
     depends_on:
@@ -46,7 +46,7 @@ services:
       - broker_msg_queue=pv
       - min_pv=0
       - max_pv=100
-      - initial_delay_second_for_broker_startup=15
+      - initial_delay_second_for_broker_startup=20
       - logfile=./log/consumer.txt
       - log_level=INFO
       - filestore=./log/pv.csv
