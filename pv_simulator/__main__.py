@@ -27,7 +27,7 @@ async def main():
         broker_queue_name = os.environ['broker_msg_queue']
         min_pv = int(os.environ['min_pv'])
         max_pv = int(os.environ['max_pv'])
-        initial_sleep_for_broker = int(os.environ['initial_sleep'])
+        initial_delay_second_for_broker_startup = int(os.environ['initial_delay_second_for_broker_startup'])
 
         logging.info("Broker address: %s, Message Queue: %s, Min_PV: %s Max_PV: %s",
                      broker_address, broker_queue_name, min_pv, max_pv)
@@ -38,7 +38,7 @@ async def main():
                                    csv_filer_writer=csv_file_writer)
         try:
             # initial sleep for the broker to be ready
-            time.sleep(initial_sleep_for_broker)
+            time.sleep(initial_delay_second_for_broker_startup)
             # Connect with broker
             await pv_simulator.connect_with_broker()
             # start consuming power values

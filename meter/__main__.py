@@ -27,7 +27,7 @@ async def main():
         min_pv = int(os.environ['min_pv'])
         max_pv = int(os.environ['max_pv'])
         publishing_interval_seconds = int(os.environ['publishing_interval_seconds'])
-        initial_sleep_for_broker = int(os.environ['initial_sleep'])
+        initial_delay_second_for_broker_startup = int(os.environ['initial_delay_second_for_broker_startup'])
 
         logging.info("Broker address: %s, Message Queue: %s, Min_PV: %s Max_PV: %s Publish Interval (Second): %s",
                      broker_address, broker_queue_name, min_pv, max_pv, publishing_interval_seconds)
@@ -36,7 +36,7 @@ async def main():
                       max_power_value=max_pv, power_value_generator=lambda x, y: random.randrange(x, y))
         try:
             # initial sleep for the broker to be ready
-            time.sleep(initial_sleep_for_broker)
+            time.sleep(initial_delay_second_for_broker_startup)
             # connect with broker
             await meter.connect_with_broker()
             # start publishing
