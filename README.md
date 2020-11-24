@@ -19,3 +19,11 @@ To run this project, you need to have **docker** installed in your machine. A **
  1. `docker-compose build` (to build the images)
  2. `docker-compose start` (start the services)
  3. `docker-compose stop` (stop the services)
+ 
+ ## Output
+ ### Logs
+ Please find the respective log files in **meter/log** and **pv_simulator/log/** directories.
+ ### PV Output
+ Please find the pv output file as **pv_simulator/log/pv.csv**
+ ### UI
+ Please visit http://localhost:15672 to have look at the broker.
