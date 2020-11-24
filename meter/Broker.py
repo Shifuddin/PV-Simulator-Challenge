@@ -1,5 +1,5 @@
 """
-This is a generic broker class.
+Broker Interface
 """
 __author__ = 'Md Shifuddin Al Masud'
 __email__ = 'shifuddin.masud@gmail.com'
