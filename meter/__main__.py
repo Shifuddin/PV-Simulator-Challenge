@@ -18,7 +18,8 @@ import time
 async def main():
     try:
         # configure logging
-        logging.basicConfig(filename="./log/producer.txt", filemode="a", level=logging.INFO,
+        logfile = os.environ['logfile']
+        logging.basicConfig(filename=logfile, filemode="a", level=logging.INFO,
                             format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
         # read values from environment
@@ -35,10 +36,10 @@ async def main():
         meter = Meter(broker=broker, min_power_value=min_pv,
                       max_power_value=max_pv, power_value_generator=lambda x, y: random.randrange(x, y))
         try:
+             # initial delay for the broker connection
+            time.sleep(initial_delay_second_for_broker_startup)
             # connect with broker
             await meter.connect_with_broker()
-            # initial delay for the broker connection
-            time.sleep(initial_delay_second_for_broker_startup)
             # start publishing
             await meter.start_publishing(producing_interval_seconds=publishing_interval_seconds)
         except KeyboardInterrupt as key:
