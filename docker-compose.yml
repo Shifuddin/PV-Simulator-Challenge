@@ -31,6 +31,7 @@ services:
       - max_pv=9000
       - publishing_interval_seconds=10
       - initial_delay_second_for_broker_startup=60
+      - logfile=./log/producer.txt
     links:
       - "rabbitmq:rabbitmq"
     depends_on:
