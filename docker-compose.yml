@@ -50,7 +50,7 @@ services:
       - initial_delay_second_for_broker_startup=60
       - logfile=./log/consumer.txt
       - log_level=INFO
-      - filestore=./log/pv.csv
+      - file_store=./log/pv.csv
     links:
       - "rabbitmq:rabbitmq"
     depends_on:
