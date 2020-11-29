@@ -30,7 +30,7 @@ services:
       - min_pv=0
       - max_pv=9000
       - publishing_interval_seconds=10
-      - initial_delay_second_for_broker_startup=60
+      - initial_delay_second_for_broker_startup=15
     links:
       - "rabbitmq:rabbitmq"
     depends_on:
