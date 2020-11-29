@@ -28,7 +28,7 @@ Configurations are adjusted in the **docker-compose** file. Please change if it'
 * logfile: Log file. 
 
 
-### Steps
+### Run Steps
  1. `docker-compose build` (to build the images)
  2. `docker-compose start` (start the services)
  3. `docker-compose stop` (stop the services)
