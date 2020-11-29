@@ -18,8 +18,10 @@ import time
 
 async def main():
     try:
+        # get logfile location
+        logfile = os.environ['logfile']
         # configure logging
-        logging.basicConfig(filename="./log/consumer.txt", filemode="a", level=logging.INFO,
+        logging.basicConfig(filename=logfile, filemode="a", level=logging.INFO,
                             format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
         # read values from environment
@@ -31,8 +33,12 @@ async def main():
 
         logging.info("Broker address: %s, Message Queue: %s, Min_PV: %s Max_PV: %s",
                      broker_address, broker_queue_name, min_pv, max_pv)
-        csv_file_writer = CSVFileWriter("./log/pv.csv")
+         # get output file location
+        file_store = os.environ['file_store']
+        csv_file_writer = CSVFileWriter(file_store)
+        
         broker = RabbitMQAsyncBroker(broker_address=broker_address, broker_queue_name=broker_queue_name)
+        
         pv_simulator = PVSimulator(broker= broker, min_power_value=min_pv, max_power_value=max_pv,
                                    simulator_pv_generator=lambda x, y: random.randrange(x, y),
                                    csv_filer_writer=csv_file_writer)
