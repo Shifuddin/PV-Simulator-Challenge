@@ -35,10 +35,10 @@ async def main():
         meter = Meter(broker=broker, min_power_value=min_pv,
                       max_power_value=max_pv, power_value_generator=lambda x, y: random.randrange(x, y))
         try:
-            # initial sleep for the broker to be ready
-            time.sleep(initial_delay_second_for_broker_startup)
             # connect with broker
             await meter.connect_with_broker()
+            # initial delay for the broker connection
+            time.sleep(initial_delay_second_for_broker_startup)
             # start publishing
             await meter.start_publishing(producing_interval_seconds=publishing_interval_seconds)
         except KeyboardInterrupt as key:
