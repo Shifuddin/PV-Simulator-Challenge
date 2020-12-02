@@ -39,4 +39,4 @@ Configurations are adjusted in the **docker-compose** file. Please change if it'
  ### PV Output
  Please find the pv output file as **pv_simulator/log/pv.csv**
  ### UI
- Please visit http://localhost:15672 to have look at the broker.
+ Please visit http://localhost:15672 to have a look at the broker.
